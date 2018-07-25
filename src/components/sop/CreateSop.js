@@ -169,7 +169,7 @@ class CreateSop extends React.Component {
           />
         </div>
         <div className="form-group">
-          <input type="file" className="form-control-file" onChange={this.onChange} required/>
+          <input type="file" className="form-control-file" accept=".pdf" onChange={this.onChange} required/>
         </div>
         <div className="text-center">
           <button className="btn btn-secondary" type="submit">Create SOP</button>

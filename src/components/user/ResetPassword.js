@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import instance from '../api/init'
 
-class ChangePassword extends Component {
+class ResetPassword extends Component {
   constructor(props) {
     super(props)
     this.state = {
       errors: {},
-      oldPassword: "",
       password: "",
       password2: "",
-      dbPasswordError: ""
+      err: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,13 +17,8 @@ class ChangePassword extends Component {
   validate = () => {
     let isError = false
     const errors = {
-      oldPasswordError: "",
       passwordError: "",
       password2Error: ""
-    }
-    if (this.state.oldPassword.length < 3 || this.state.oldPassword.length > 30) {
-      isError = true
-      errors.oldPasswordError = 'Invalid Old password'
     }
     if (this.state.password.length < 3 || this.state.password.length > 30) {
       isError = true
@@ -59,43 +53,28 @@ class ChangePassword extends Component {
     const err = this.validate()
     if (!err) {
     const password = {
-      oldPassword: this.state.oldPassword,
       password: this.state.password,
       password2: this.state.password2
     }
-    instance.patch("/users/password", password) 
+    instance.patch(`/users/${this.props.match.params.id}/password`, password) 
     .then(res => {
-      alert('Your password was updated')
+      alert('Users password was updated')
       this.props.history.go(-1)
     })
     .catch(err => {
-      this.setState({dbPasswordError: 'Your old password is incorrect'})
-  })
-    
+      this.setState({
+        err: Object.values(err.response.data.errors)
+      })
+  })    
   } 
 }
 
 render() {
   return (
     <div className="data-wrapper4">
-      <h3 className="solid-heading">Change Password</h3>
+      <h3 className="solid-heading">Reset User Password</h3>
       <br/>
       <form className='form' onSubmit={this.handleSubmit}>
-        <div className='form-group'>
-          <label className='label'>Old Password</label>
-          <div className='control'>
-            <input
-              className='form-control form-control-md'
-              type='password'
-              name='oldPassword'
-              value={this.state.oldPassword}
-              onChange={this.handleChange}
-              required
-              />
-              <div className="form-alert">{this.state.oldPasswordError}</div>
-              <div className="form-alert">{this.state.dbPasswordError}</div>
-          </div>
-        </div>
         <div className='form-group'>
           <label className='label'>New Password</label>
           <div className='control'>
@@ -136,8 +115,8 @@ render() {
         </div>
       </form>
     </div>
-      )
-    }
+    )
+  }
 }
 
-export default ChangePassword
+export default ResetPassword

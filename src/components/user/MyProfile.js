@@ -6,7 +6,8 @@ import instance from '../api/init'
 class MyProfile extends Component {
   state = { 
     user: "",
-    loaded: false
+    loaded: false,
+    errorsList: false
   }
   componentDidMount() {
     instance.get('users/me')
@@ -17,8 +18,10 @@ class MyProfile extends Component {
          loaded: true
         })
      })
-    .catch((error)=>{
-       console.log(error);
+     .catch((error)=>{
+      this.setState({
+        errorsList: Object.values(error.response.data.errors)
+      })
     })
   }
   render() {

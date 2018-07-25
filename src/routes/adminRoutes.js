@@ -5,6 +5,7 @@ import EditSop from '../components/sop/EditSop'
 import ManageUsers from '../components/user/ManageUsers'
 import ViewUser from '../components/user/ViewUser'
 import Register from '../components/auth/Register'
+import ResetPassword from '../components/user/ResetPassword'
 
 const adminRoutes = [
 {
@@ -28,6 +29,9 @@ const adminRoutes = [
 }, {
   path: '/sops/:id/addversion',
   component: AddSopVersion,
+}, {
+  path: '/users/:id/password',
+  component: ResetPassword
 }
 
 ];

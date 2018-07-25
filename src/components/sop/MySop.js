@@ -9,7 +9,8 @@ class MySop extends Component {
       loaded: false,
       readSops: [],
       unreadSops: [],
-      outdatedSops: []
+      outdatedSops: [],
+      errorsLust: null
     }
   }
 
@@ -23,9 +24,11 @@ class MySop extends Component {
           outdatedSops: response.data.outdatedSops
         })
       })
-    .catch((error)=>{
-        console.log(error);
-    })
+      .catch((error)=>{
+        this.setState({
+          errorsList: Object.values(error.response.data.errors)
+        })
+      })
   }
 
   onReadSop(sop) {
@@ -48,13 +51,20 @@ class MySop extends Component {
   }
   
   render() {
-    const readSops = this.state.readSops.map((sop, i) => <div className="sop-read" key={i}> <img className="pdf-logo" src={ require('../../img/pdf2.png') } />{sop.title}</div>)
+    if (!this.state.loaded) { return(<Loader/>)}
+
+    const readSops = this.state.readSops.map((sop, i) => <div className="sop-read" key={i}> 
+    <a href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${sop.currentVersion.awsPath}`}>
+      <img className="pdf-logo" src={ require('../../img/pdf2.png') } alt="pdf icon"/>
+      {sop.title}
+    </a>
+    </div>)
 
     const unreadSops = this.state.unreadSops.map((sop, i) => 
       <div className="unread-list-item" key={i}>
         <div className="sop-unread-user">
           <a href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${sop.currentVersion.awsPath}`}>
-            <img className="pdf-logo" src={ require('../../img/pdf2.png') } />
+            <img className="pdf-logo" src={ require('../../img/pdf2.png') } alt="pdf icon"/>
             {sop.title}
           </a>
         </div>
@@ -71,7 +81,7 @@ class MySop extends Component {
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="submit" className="btn btn-primary" onClick={() => this.onReadSop(sop) } data-dismiss="modal">Agree</button>
+                  <button type="submit" className="btn btn-primary" onClick={() => this.onReadSop(sop) } data-dismiss="modal">Submit</button>
                 </div>
               </div>
           </div>
@@ -79,11 +89,10 @@ class MySop extends Component {
         {/* <div className="button-mark-read" onClick={() => this.onReadSop(sop)}> Mark As Read </div> */}
       </div>)
 
-
     const outdatedSops = this.state.outdatedSops.map((sop, i) => 
       <div className="unread-list-item" key={i}>
           <a className="sop-outdated-user" href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${sop.currentVersion.awsPath}`}>
-          <img className="pdf-logo" src={ require('../../img/pdf.png') } />
+          <img className="pdf-logo" src={ require('../../img/pdf.png') } alt="pdf icon"/>
           {sop.title}
           </a>
           <div className="span4 proj-div button-mark-read-outdated" data-toggle="modal" data-target="#Modal">Mark as read</div>
@@ -99,14 +108,19 @@ class MySop extends Component {
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="submit" className="btn btn-primary" onClick={() => this.onReadSop(sop) } data-dismiss="modal">Agree</button>
+                  <button type="submit" className="btn btn-primary" onClick={() => this.onReadSop(sop) } data-dismiss="modal">Submit</button>
                 </div>
               </div>
           </div>
         </div>
       </div>)
 
-    if (!this.state.loaded) { return(<Loader/>)}
+      // const outdatedSops = this.state.outdatedSops.map((sop, i) => 
+      //   <div className="sop-outdated" key={i}>  
+      //     <img className="pdf-logo" src={ require('../../img/pdf2.png') } /> 
+      //     {sop.title}  
+      //     <button> Mark As Read </button> </div>)
+
 
     return (
       <div className="data-wrapper4">

@@ -30,7 +30,6 @@ class Login extends Component {
           this.props.updateLogin(res.data) 
           }
        else{
-         console.log(res.data.errors)
          this.setState({incorrectCredentials: res.data.errors})
        }
       })

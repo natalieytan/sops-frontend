@@ -13,7 +13,8 @@ class AddSopVersion extends React.Component {
       loaded: false,
       hello: '',
       sop: null,
-      fireRedirect: false
+      fireRedirect: false,
+      errorsList: null
     }
     this.onFormSubmit = this.onFormSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -48,6 +49,11 @@ class AddSopVersion extends React.Component {
           fireRedirect: true
         })
       }
+    })
+    .catch((err)=>{
+      this.setState({
+        errorsList: Object.values(err.response.data.errors)
+      })
     })
   }
 
@@ -93,7 +99,9 @@ class AddSopVersion extends React.Component {
                   name="author" id="author"
                   className="form-control" 
                   value={this.state.author} 
-                  onChange={this.handleInputChange} />
+                  onChange={this.handleInputChange} 
+                  required
+                  />
           </div>
 
 
@@ -102,11 +110,12 @@ class AddSopVersion extends React.Component {
             <input type="date" className="form-control" id="createdAt" name="createdAt"
             value={this.state.createdAt} 
             onChange={this.handleInputChange}
+            required
             />
           </div>
 
           <div className="form-group">
-            <input type="file" className="form-control-file" onChange={this.onChange} />
+            <input type="file" className="form-control-file" accept=".pdf" onChange={this.onChange} required/>
           </div>
         
           <div className="text-center">

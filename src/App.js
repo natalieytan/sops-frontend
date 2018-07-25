@@ -10,13 +10,13 @@ import Error403 from './components/errors/Error403'
 import axios from './api/init'
 import adminRoutes from './routes/adminRoutes'
 import userRoutes from './routes/userRoutes'
-import history from './components/layout/history'
 
 class App extends Component {
   state = {
     loaded: false,
     administrator: false,
-    loggedIn: false
+    loggedIn: false,
+    errors: false
   }
 
   componentDidMount() {
@@ -27,18 +27,19 @@ class App extends Component {
         administrator: response.data.administrator, 
         loaded: true})
      })
-    .catch((error)=>{
-       console.log(error);
+    .catch((err)=>{
+       this.setState({
+         errors: Object.values(err.response.data.errors)
+       })
     })
   }
   
   updateLogin = (data) => {
-    console.log(data)
     this.setState({
       loggedIn: true,
       administrator: data.administrator,
       loaded: true
-  })
+    })
   }
 
   updateLogout = () => {
@@ -59,7 +60,7 @@ class App extends Component {
     const loginRouteComponents = userRoutes.map(({path}, key) =>  <Route path={path} render={() => <Redirect to="/" key={key}/>} />)
     if (!this.state.loaded) { return <Loader /> }
     return(
-      <Router history={history} forceRefresh={true}>
+      <Router>
       <div>
         { this.state.loggedIn ? <Navbar administrator={this.state.administrator} updateLogout={this.updateLogout}/> : <Header />}
         <div className="container">
