@@ -7,20 +7,21 @@ import ReactTable from 'react-table'
 class ManageUsers extends Component {
   state = {
     users: [{}],
-    loaded: false
+    loaded: false,
+    errorsList: false,
   } 
   componentDidMount() {
     instance.get('users/')
      .then((response) => {
-       console.log(response);
        this.setState({
          users: response.data,
          loaded: true
         })
-      //  console.log(this.state)
      })
-    .catch((error)=>{
-       console.log(error);
+     .catch((error)=>{
+      this.setState({
+        errorsList: Object.values(error.response.data.errors)
+      })
     })
   }
 

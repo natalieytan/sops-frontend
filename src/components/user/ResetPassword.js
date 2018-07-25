@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 import instance from '../api/init'
-import ManageSop from '../sop/ManageSop'
-
 
 class ResetPassword extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       errors: {},
       password: "",
-      password2: ""
+      password2: "",
+      err: false
     }
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -23,22 +20,18 @@ class ResetPassword extends Component {
       passwordError: "",
       password2Error: ""
     }
-
     if (this.state.password.length < 3 || this.state.password.length > 30) {
       isError = true
       errors.passwordError = 'Your new password must be between 2 and 30 characters'
     }
-
     if (this.state.password2.length < 3 || this.state.password2.length > 30)  {
       isError = true
       errors.password2Error = 'Your new password must be between 2 and 30 characters'
     }
-
     if (this.state.password !== this.state.password2)  {
       isError = true
       errors.password2Error = 'Your passwords do not match'
     }
-
     if (isError) {
       this.setState(errors)
     }
@@ -49,9 +42,7 @@ class ResetPassword extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
     this.setState({[event.target.name]: event.target.value})
-
     this.setState({
       [name]: value
     });
@@ -61,23 +52,20 @@ class ResetPassword extends Component {
     event.preventDefault();
     const err = this.validate()
     if (!err) {
-    console.log(this.state);
-
     const password = {
       password: this.state.password,
       password2: this.state.password2
     }
-
     instance.patch(`/users/${this.props.match.params.id}/password`, password) 
     .then(res => {
       alert('Users password was updated')
       this.props.history.go(-1)
     })
     .catch(err => {
-      console.log(password)
-      console.error(err)
-  })
-    
+      this.setState({
+        err: Object.values(err.response.data.errors)
+      })
+  })    
   } 
 }
 
@@ -127,8 +115,8 @@ render() {
         </div>
       </form>
     </div>
-      )
-    }
+    )
+  }
 }
 
 export default ResetPassword

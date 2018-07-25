@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import Loader from '../layout/Loader'
 import axios from '../api/init'
 import ReactTable from 'react-table'
@@ -11,6 +10,7 @@ class AllSop extends Component {
   state = {
     sops: [],
     loaded: false,
+    errorsList: false,
   }
 
   componentDidMount() {
@@ -21,8 +21,10 @@ class AllSop extends Component {
           loaded: true
         })
       })
-    .catch((error)=>{
-        console.log(error);
+    .catch((err)=>{
+      this.setState({
+        errorsList: Object.values(err.response.data.errors)
+      })
     })
   }   
 
@@ -38,7 +40,7 @@ class AllSop extends Component {
               Header: "Title",
               accessor: "title",
               Cell: (data) => (
-                <a href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${data.original.awsPath}`}><span><img src={pdfLogo} /> {data.value} </span></a>
+                <a href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${data.original.awsPath}`}><span><img src={pdfLogo} alt="pdf icon"/> {data.value} </span></a>
               )
             },
             {

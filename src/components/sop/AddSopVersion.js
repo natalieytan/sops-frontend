@@ -13,7 +13,8 @@ class AddSopVersion extends React.Component {
       loaded: false,
       hello: '',
       sop: null,
-      fireRedirect: false
+      fireRedirect: false,
+      errorsList: null
     }
     this.onFormSubmit = this.onFormSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -48,6 +49,11 @@ class AddSopVersion extends React.Component {
           fireRedirect: true
         })
       }
+    })
+    .catch((err)=>{
+      this.setState({
+        errorsList: Object.values(err.response.data.errors)
+      })
     })
   }
 

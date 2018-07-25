@@ -78,8 +78,6 @@ class ViewUser extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
-
     const err = this.validate()
     if (!err) {
 
@@ -106,14 +104,16 @@ class ViewUser extends Component {
       active: this.state.active,
       administrator: this.state.administrator
     }
-    console.log(user)
     instance.patch(`/users/${this.props.match.params.id}`, user) 
     .then(res => {
-      console.log(res.data);
       alert('User successfully updated')
       this.props.history.go(-1)
     })
-    .catch(err => console.error(err))
+    .catch((error)=>{
+      this.setState({
+        errorsList: Object.values(error.response.data.errors)
+      })
+    })
   }
 }
 

@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import instance from '../api/init'
-import ManageSop from '../sop/ManageSop'
 
 class ChangePassword extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       errors: {},
       oldPassword: "",
@@ -13,7 +11,6 @@ class ChangePassword extends Component {
       password2: "",
       dbPasswordError: ""
     }
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -25,27 +22,22 @@ class ChangePassword extends Component {
       passwordError: "",
       password2Error: ""
     }
-
     if (this.state.oldPassword.length < 3 || this.state.oldPassword.length > 30) {
       isError = true
       errors.oldPasswordError = 'Invalid Old password'
     }
-
     if (this.state.password.length < 3 || this.state.password.length > 30) {
       isError = true
       errors.passwordError = 'Your new password must be between 2 and 30 characters'
     }
-
     if (this.state.password2.length < 3 || this.state.password2.length > 30)  {
       isError = true
       errors.password2Error = 'Your new password must be between 2 and 30 characters'
     }
-
     if (this.state.password !== this.state.password2)  {
       isError = true
       errors.password2Error = 'Your passwords do not match'
     }
-
     if (isError) {
       this.setState(errors)
     }
@@ -56,9 +48,7 @@ class ChangePassword extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
     this.setState({[event.target.name]: event.target.value})
-
     this.setState({
       [name]: value
     });
@@ -68,22 +58,17 @@ class ChangePassword extends Component {
     event.preventDefault();
     const err = this.validate()
     if (!err) {
-    console.log(this.state);
-
-    // on submit form data to update password in database
     const password = {
       oldPassword: this.state.oldPassword,
       password: this.state.password,
       password2: this.state.password2
     }
-
     instance.patch("/users/password", password) 
     .then(res => {
       alert('Your password was updated')
       this.props.history.go(-1)
     })
     .catch(err => {
-      console.error(err)
       this.setState({dbPasswordError: 'Your old password is incorrect'})
   })
     
