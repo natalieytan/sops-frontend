@@ -18,8 +18,7 @@ const Navbar = ({administrator, updateLogout}) => {
 
     return (
        <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-            {/* <img className="logo" src={ require('../../img/Toyota_logo.png') } /> */}
-            <h1 className="title">TOYOTA</h1>
+            <h1 className="title">TOMATO</h1>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -33,7 +32,7 @@ const Navbar = ({administrator, updateLogout}) => {
                 </li>
                 {administrator ? adminLinkComponents : userLinkComponents}
                 <li className="nav-item">
-                  <a href="/" className="nav-link" to="/logout" onClick={updateLogout}>Log out</a>
+                  <a href="#" className="nav-link" onClick={updateLogout}>Log out</a>
                 </li>
             </ul>
             </div>
