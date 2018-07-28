@@ -43,9 +43,9 @@ class EditSop extends Component {
           loaded: true
         })
       })
-    .catch((error)=>{
-        console.log(error);
-    })
+      .catch((error)=>{
+          console.log(error);
+      })
   }
 
   onRemoveUser(user) {
@@ -80,6 +80,9 @@ class EditSop extends Component {
         }
       }))
     }})
+    .catch(() => {
+      alert("Unable to submit form. Please try again.")
+    })
   }
 
   onChange(e) {
@@ -95,12 +98,12 @@ class EditSop extends Component {
         <td>{sop.version}</td>
         <td>{moment(sop.createdAt).format('DD MMM YYYY')}</td>
         <td>{sop.author}</td>
-        <td><a href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${sop.awsPath}`}><img src={pdfLogo} alt="pdf icon"/> View </a> </td>
+        <td><a href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${sop.awsPath}`}><img alt="pdf logo" src={pdfLogo} /> View </a> </td>
         <td>Delete </td>
       </tr>
     )
     } else {
-      previousSops = (<tr><td className="text-center" colspan="5"><em>No Previous Versions</em></td></tr>)
+      previousSops = (<tr><td className="text-center" colSpan="5"><em>No Previous Versions</em></td></tr>)
     }
   
     const usersRead = this.state.usersRead.map((user, i) => 
@@ -127,8 +130,8 @@ class EditSop extends Component {
     const numberUsersUnread = this.state.usersUnread.length
     const numberUsersTotal = this.state.usersRead.length + this.state.usersUnread.length
 
-    const numberUsersReadPercentage = numberUsersRead * (Math.round(100*numberUsersRead/numberUsersTotal))
-    const numberUsersUnreadPercentage = numberUsersUnread * (Math.round(100*numberUsersUnread/numberUsersTotal))
+    const numberUsersReadPercentage = (Math.round(100*numberUsersRead/numberUsersTotal))
+    const numberUsersUnreadPercentage = (Math.round(100*numberUsersUnread/numberUsersTotal))
 
 
     return(
@@ -142,7 +145,7 @@ class EditSop extends Component {
             <dt className="col-sm-3">Department</dt>
             <dd className="col-sm-9">{this.state.sop.department}</dd>
             <dt className="col-sm-3">Link to File</dt>
-            <dd className="col-sm-9"><a class="btn btn-success" href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${this.state.sop.currentVersion.awsPath}`}><img src={pdfLogo} alt="pdf icon"/> Download SOP</a></dd>
+            <dd className="col-sm-9"><a className="btn btn-success" href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${this.state.sop.currentVersion.awsPath}`}><img alt="pdf logo" src={pdfLogo} /> Download SOP</a></dd>
           </dl>
           <hr />
           <dl className="row">
@@ -232,22 +235,22 @@ class EditSop extends Component {
             }}> <button className="btn btn-success">Add New Version of SOP</button> </Link>
             <button className="btn btn-danger"  data-toggle="modal" data-target=".bd-example-modal-lg">Delete SOP</button>
           
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Confirmation required to delete SOP</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div className="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Confirmation required to delete SOP</h5>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                   <p>Are you sure you would you like to delete this SOP?</p>
                   <p>If you choose to continue, all information relating to this SOP will be deleted including previous versions, files and the list of employees who have read these documents.</p>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-success" disabled>Delete SOP</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-success" disabled>Delete SOP</button>
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
               </div>
             </div>

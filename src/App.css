@@ -343,3 +343,7 @@ button a:hover
      text-decoration:none; 
      cursor:pointer;  
 }
+
+.table-center {
+  text-align: center;
+}

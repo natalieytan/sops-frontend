@@ -120,7 +120,6 @@ class ViewUser extends Component {
   componentDidMount() {
     instance.get(`/users/${this.props.match.params.id}`)
      .then((response) => {
-       console.log(response);
        this.setState({
         user: true,
         firstName: response.data.user.firstName,
@@ -144,8 +143,7 @@ class ViewUser extends Component {
   render() {
     const readSops = this.state.readSops.map((sop, i) => <div className="sop-read" key={i}>{sop.title}</div>)
     const unreadSops = this.state.unreadSops.map((sop, i) => <div className="sop-unread-admin" key={i}>{sop.title}</div>)
-    const outdatedSops = this.state.outdatedSops.map((sop, i) => <div className="sop-outdated" key={i}>{sop.title}</div>)
-    // let showUnreadSopsTitle = false
+    const outdatedSops = this.state.outdatedSops.map((sop, i) => <div className="sop-outdated-admin" key={i}>{sop.title}</div>)
 
     if(this.state.user) {
       return (

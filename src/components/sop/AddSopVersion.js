@@ -50,10 +50,8 @@ class AddSopVersion extends React.Component {
         })
       }
     })
-    .catch((err)=>{
-      this.setState({
-        errorsList: Object.values(err.response.data.errors)
-      })
+    .catch(() => {
+      alert("Unable to upload new version. Please try again.")
     })
   }
 

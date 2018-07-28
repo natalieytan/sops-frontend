@@ -104,7 +104,7 @@ class CreateSop extends React.Component {
   render() {
     return (
       <div className="data-wrapper4">
-      <h3 class="solid-heading">Create New SOP</h3>
+      <h3 className="solid-heading">Create New SOP</h3>
       <br />
       <form onSubmit={this.onFormSubmit}>
         <div className="form-group">

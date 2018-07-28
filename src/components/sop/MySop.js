@@ -47,7 +47,9 @@ class MySop extends Component {
           }
         })
       }})
-    .catch()
+    .catch(() => {
+      alert("Unable to mark as read. Please try again.")
+    })
   }
   
   render() {
@@ -55,7 +57,7 @@ class MySop extends Component {
 
     const readSops = this.state.readSops.map((sop, i) => <div className="sop-read" key={i}> 
     <a href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${sop.currentVersion.awsPath}`}>
-      <img className="pdf-logo" src={ require('../../img/pdf2.png') } alt="pdf icon"/>
+      <img className="pdf-logo" alt="pdf logo" src={ require('../../img/pdf2.png') } />
       {sop.title}
     </a>
     </div>)
@@ -64,12 +66,12 @@ class MySop extends Component {
       <div className="unread-list-item" key={i}>
         <div className="sop-unread-user">
           <a href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${sop.currentVersion.awsPath}`}>
-            <img className="pdf-logo" src={ require('../../img/pdf2.png') } alt="pdf icon"/>
+            <img className="pdf-logo" alt="pdf logo" src={ require('../../img/pdf2.png') } />
             {sop.title}
           </a>
         </div>
-          <div className="span4 proj-div button-mark-read" data-toggle="modal" data-target="#Modal">Mark as read</div>
-          <div id="Modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div className="span4 proj-div button-mark-read" data-toggle="modal" data-target={`#Modal${sop._id}`}>Mark as read</div>
+          <div id={`Modal${sop._id}`} className="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div className="modal-dialog" tabindex="-1" role="dialog">
               <div className="modal-content">
                 <div className="modal-header">
@@ -86,17 +88,16 @@ class MySop extends Component {
               </div>
           </div>
         </div> 
-        {/* <div className="button-mark-read" onClick={() => this.onReadSop(sop)}> Mark As Read </div> */}
       </div>)
 
     const outdatedSops = this.state.outdatedSops.map((sop, i) => 
       <div className="unread-list-item" key={i}>
           <a className="sop-outdated-user" href={`${process.env.REACT_APP_BACKEND_URL}/sops/download/${sop.currentVersion.awsPath}`}>
-          <img className="pdf-logo" src={ require('../../img/pdf.png') } alt="pdf icon"/>
+          <img className="pdf-logo" alt="pdf logo" src={ require('../../img/pdf.png') } />
           {sop.title}
           </a>
-          <div className="span4 proj-div button-mark-read-outdated" data-toggle="modal" data-target="#Modal">Mark as read</div>
-          <div id="Modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div className="span4 proj-div button-mark-read-outdated" data-toggle="modal" data-target={`#Modal${sop._id}`}>Mark as read</div>
+          <div id={`Modal${sop._id}`} className="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div className="modal-dialog" tabindex="-1" role="dialog">
               <div className="modal-content">
                 <div className="modal-header">
@@ -115,12 +116,7 @@ class MySop extends Component {
         </div>
       </div>)
 
-      // const outdatedSops = this.state.outdatedSops.map((sop, i) => 
-      //   <div className="sop-outdated" key={i}>  
-      //     <img className="pdf-logo" src={ require('../../img/pdf2.png') } /> 
-      //     {sop.title}  
-      //     <button> Mark As Read </button> </div>)
-
+    if (!this.state.loaded) { return(<Loader/>)}
 
     return (
       <div className="data-wrapper4">

@@ -58,21 +58,24 @@ class ManageUsers extends Component {
               Header: "Admin",
               accessor: d => {
                 return d.administrator ? "Yes" : "No"
-              }
+              },
+              className: "table-center"
             },
             {
               id: "Active",
               Header: "Active",
               accessor: d => {
                 return d.active ? "Yes" : "No"
-              }
+              },
+              className: "table-center"
             },            
             {
               Header: "Edit",
               accessor: "_id",
               Cell: row => (
                 <Link to={`/users/${row.value}`}>Edit</Link>
-              )
+              ),
+              className: "table-center"
             }
           ]}
           className="-striped -highlight"

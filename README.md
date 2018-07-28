@@ -1,11 +1,9 @@
 # CA Team 2 - Term 3 Group Project
 # Safe Operating Procedure Management Application
 
-GitHub: [Frontend](#)
+GitHub: [Front-end](https://github.com/peytr/toyota-frontend) - GitHub: [Back-end](https://github.com/peytr/toyota-backend)
 
-GitHub: [Backend](#)
-
-Deployed: [www.something.com](#)
+Deployed: [https://radiant-river-46965.herokuapp.com/](https://radiant-river-46965.herokuapp.com/)
 
 ## Table of Contents
 
@@ -13,15 +11,6 @@ Deployed: [www.something.com](#)
 
 - **[Project Summary](#project-summary)**
   - [Project Specifications](#project-specifications)  
-- **[Project Management](#project-management)**
-  - [Client Interaction](#client-interaction)
-  - [Information Gathering](#information-gathering)
-  - [Project Planning and Scope](#project-planning-and-scope)
-  - [Project Schedule](#project-schedule)
-  - [Work Allocation](#work-allocation)
-  - [Git GitHub and Git Workflow](git-github-and-git-workflow)
-  - [Code Reviews](#code-reviews)
-  - [Final Project Sign Off](#final-project-sign-off)
 - **[Application Design](application-design)**
   - [Database Design](#database-design)
   - [User Stories](#user-stories)
@@ -73,87 +62,10 @@ __Back-end__
 - MongoDB
 - Mongoose
 
-# Project Management
-## Client Interaction
-### Meeting schedules, meeting minutes and emails
-We recorded our client interactions, meeting schedules and emails on our Trello board so that all team members had access to the information.
-
-Meeting content, meeting minutes and important email content was attached to the corresponding Trello card, available for the team to view.\
-<br>
-![Client Interactions Diary](readme_assets/client-meeting-diary.png)\
-Trello client interaction diary.
-
-## Information Gathering
-After the initial meeting with our client we were able to understand the full requirements of the project. This allowed us to carry out extensive research so we were able to move forward and start coding confidently knowing we had the tools available to complete the tasks required.\
-From our research we were able to determine that we needed to provide the following:
-- user authentication
-- user authorization
-- file upload and download
-- administration rights
-
-## Project Planning and Scope
-![Team Whiteboard Planning 1](readme_assets/group-whiteboard.png) ![Team Whiteboard Planning 1](readme_assets/whiteboard-output.png)\
-Team white-boarding planning sessions
-
- Once we understood our project requirements and had a plan of attack our team put together a keynote presentation which included a preliminary statement of project scope and planning direction which we presented to our team of instructors for project sign off.
-
-![Keynote Slide 1](readme_assets/project-charter-1.png)
-![Keynote Slide 2](readme_assets/project-charter-2.png)\
-Project presentation for sign off.
-
-## Project Schedule
-A basic project schedule was created to provide a broad overview and understanding of the overall project timeline week to week. Our team trello board was used for more focused project control and individual task detail.
-
-![Project Planner](readme_assets/project-planning.png)
-
-
-
-
-## Work Allocation
-Project roles and responsibilities were allocated amongst the team after a group discussion via our group Trello board. Using a group trello board allowed us to monitor each others assigned work progress, flag any issues and reassess the project scope as the project build progressed.
-Our group trello board included the following lists:
-- Components backlog
-- Misc backlog
-- In progress
-- For review
-- Completed
-- Issues
-
-![Group Tracking Trello Board](readme_assets/trello.png)\
-Group Tracking Trello Board.
-
-Our group trello board can be visited using the following link -
-[Group 2 - Trello Board](https://trello.com/b/JF1Avb8y/toyota-ppd-sop-app).
-
-## Git, GitHub and Git Workflow
-To prevent any workflow issues we decided as a group from the start to have a protected master and work off a frontend and backend development branch. 
-Pull requests were made to the master branch at intermittent times through out the project.
-
-One team member was made Git master and other team members forked the development branches and worked on feature branches from there.
-
-Further insights in to our merges, commits, pull requests and overall project flow can be found at our GitHub links at the top of this document. [Top](#CA-Team-2---Term-3-Group-Project)
-
-![Frontend GitHub Insights](readme_assets/github-frontend.png) ![Backend GitHub Insights](readme_assets/github-backend.png)\
-Front and Backend GitHub insights
-
-
-
-## Code Reviews
-- Code reviews - (Luke)
-
-## Final Project Sign Off
-**After Thursday final meeting**
-- Manage system testing and hand over activities. Prepare maintenance or support plans for client
-- Obtain final project sign-off
-- As a team, conduct post project review
-- Create a questionnaire for the client to ascertain the satisfaction with your products and services
-
-<br>
-
 # Application Design
 ## Database Design
-![Database Schema Design](readme_assets/team-2-erd.png)\
-Our database schema design.
+Our database schema design.\
+![Database Schema Design](readme_assets/team-2-erd.png)
 
 ## User Stories
 Our User Stories
@@ -195,20 +107,76 @@ __Staff Member - Administration__
 - [ SOP - Search all ] As an administrator I would like to be notified if there has been a change to an SOP that I am required to be familiar with so that I am up to date with the latest information. - (nice to have)
 - [ SOP - View Unread ] As a administrator I would like to access the SOP and user database in an easy to use straight forward interface so that I don't have to learn how to use another system.
 
+Our User Stories Trello Board.\
 ![User Stories Trello Board](readme_assets/trello-user-stories.png)\
-Our User Stories Trello Board. Our Trello user stories board can be viewed here, [User Stories Trello Board](https://trello.com/b/PXeF8pny/user-stories).
+Our Trello user stories board can be viewed here, [User Stories Trello Board](https://trello.com/b/PXeF8pny/user-stories).
 
 
 
 ## User Workflow
-- A workflow diagram of the user journey/s - (Luke)
+Our application is unique in the fact that employees (non-admin users) have much less functionality available to them than admins (managers). A regular user just needs the application to read the SOPs allocated to them by their manager, and agree to having read them.
+
+The admins on the other hand, have the power to create new users, edit current users, create and edit new SOPs and SOP versions, add users to SOPs, manage user's forgotten passwords, manage user's employment status within the company and more.
+
+This discrepancy of usability can be seen most clearly from the below user workflow diagrams;
+
+Admin User (Employee)\
+![Employee Workflow Diagram](readme_assets/user-workflow.png "Employee Workflow Diagram")
+
+Admin User (Manager)\
+![Manager Workflow Diagram](readme_assets/admin-workflow.png "Manager Workflow Diagram")
 
 ## Wireframes
-- Wireframes for all main pages of your app - (Luke/Pete)
+We built a significant amount of wireframes on Figma prior to commencing any code. We found this was a very good way of knowing what we were building along the way, both for the front-end and back-end. 
+
+Although there were too many wireframes built to show them all in detail, some examples can be seen below:
+
+Desktop - Admin (MySOP Page)\
+![Admin Desktop](readme_assets/desktop-admin-manage-user-800.png)
+
+Mobile - User (MySOP Page)\
+![User Desktop](readme_assets/ipad-my-sop-75-600.png)
+
+Mobile - Admin (Users Pages)\
+![Admin Mobile](readme_assets/iphone-1-1-600.png)
+
+Mobile - User (Login Pages)\
+![User Mobile](readme_assets/iphone-1-600.png)
+
+The extent of out wireframes\
+![Complete Wireframe](readme_assets/wireframes-all.png)
 
 ## Challenges
+During the production period of our application, we inevitably faced several challenges that put a halt to plans.
+
+The first and perhaps most serious challenge for us, was that due to Toyota Australia’s current IT situation, our app had to be fully compatible with Internet Explorer 11.  
+
+This was a difficult ordeal since IE 11 is incompatible with so many standard and expected browser functions. Every new feature we wanted to implement was first cross checked via a browser compatibility app (below).
+
+Browser compatibility chart.\
+![IE Compatibility Image](readme_assets/ie-compat.png "IE Compatibility Image")
+
+So many times we were let down by IE and had to seek alternative paths, whilst still ensuring our app was compatible with modern mobile and tablet devices.
+
+Another notable challenge was security.
+
+Initially we opted to use JSON Web Tokens for a system authentication method. We then decided to store the token in local storage. This seemed to work fine until we kept reading articles doubting the safety of using local storage to store such sensitive information.
+We ascertained that the issue really boiled down to cross-site scripting (XSS) attacks.
+
+Basically, If an attacker can run Javascript scripts on an app or website, they can retrieve all the data stored in local storage and send it off to their own domain. This means anything sensitive stored in local storage.
+
+The better option which we finally elected was to store the JWT in a secure cookie. This way Javascript could not be implemented against our JWT from the client-side.
+
+Finally, the most significant challenge was the time frame we had. As the project allowed us just 3 weeks to complete our application from design to production, we needed to come up with an excellent time-management plan.
+
+Our attempts of allocating workloads amongst group members were a great way to start. However, many tasks seemed to stretch well over their intended completion times, and inescapably, we put in some long nights to get the work done.
 
 ## Improvements
+As far as future improvements are concerned, we'd like to implement the following;
 
-## Final review
+- Email notifications. 
+  - Each time a new SOP is allocated to an employee's reading list or a new version of a required SOP is uploaded a notification will be received via email.
+  - If a user has SOP's in their required to read list for a certain period of time that have been unread a reminder email notification will be sent.
+
+- Full implementation with IE11. Currently our app works on both the Chrome and Safari browsers but has some issues working on IE11.
 

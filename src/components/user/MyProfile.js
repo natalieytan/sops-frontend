@@ -12,7 +12,6 @@ class MyProfile extends Component {
   componentDidMount() {
     instance.get('users/me')
      .then((response) => {
-       console.log(response);
        this.setState({
          user: response.data,
          loaded: true
